@@ -1,10 +1,13 @@
-import React, { createContext } from 'react';
+import React, { createContext, useState } from 'react';
 import Grandpa from './Grandpa';
 import './FamilyTree.css'
 
 export const AssetContext = createContext('');
+export const MoneyContext = createContext(0);
+
 
 const FamilyTree = () => {
+    const [money, setMoney] = useState(0);
 
     const asset = 'diamond';
     const newAsset = 'gold';
@@ -12,11 +15,19 @@ const FamilyTree = () => {
         <div className='family-tree'>
             
             <h2>Family Tree</h2>
+            <h4>Total Family Money: {money}</h4>
+            <MoneyContext value={[money, setMoney]}>
             <AssetContext.Provider value={newAsset}>
             <Grandpa asset={asset}></Grandpa>
             </AssetContext.Provider>
+            </MoneyContext>
         </div>
     );
 };
 
 export default FamilyTree;
+
+/**
+ * 1. create a contex using createContex with default value
+ * make sure you export the contex to be used in other files
+ */
